@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>学生信息管理表</title>
+    <!-- 引入bootstrap样式 -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <!-- 引入核心库 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+        .formInfo{
+            width: 50%;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app">
+      <!-- 利用bootstrap创建一个container -->
+      <div class="container">
+        <h3 class="text-center text-primary">学员信息输入</h3>
+        <form class="formInfo">
+          <div class="form-group">
+            <label for="username">姓名</label>
+            <input type="text" class="form-control" id="username" />
+          </div>
+          <div class="form-group">
+            <label for="age">年龄</label>
+            <input type="text" class="form-control" id="age" />
+          </div>
+          <div class="form-group">
+            <label for="telphone">电话</label>
+            <input type="text" class="form-control" id="telphone" />
+          </div>
+          <div class="form-group">
+            <label for="remark">备注信息</label>
+            <textarea name="" id="remark" cols="30" rows="10"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary">添加</button>
+          <button type="button" class="btn btn-info">重置</button>
+        </form>
+        <h3 class="text-center text-primary">学员信息表</h3>
+        <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">姓名</th>
+                <th scope="col">年龄</th>
+                <th scope="col">手机号</th>
+                <th scope="col">备注信息</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>张三</td>
+                <td>18</td>
+                <td>18819897788</td>
+                <td>我爱在峡谷流浪</td>
+                <td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>张三</td>
+                <td>18</td>
+                <td>18819897788</td>
+                <td>我爱在峡谷流浪</td>
+                <td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>张三</td>
+                <td>18</td>
+                <td>18819897788</td>
+                <td>我爱在峡谷流浪</td>
+                <td>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app", //挂载点
+        data: {
+          //属性
+          msg: "今天是周末！！！",
+        },
+      });
+    </script>
+  </body>
+</html>

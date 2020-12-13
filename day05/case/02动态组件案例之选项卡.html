@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      .nav span {
+        display: inline-block;
+        width: 110px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: goldenrod;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .active {
+        background: green !important;
+      }
+      .content {
+        border: 3px solid red;
+        height: 100px;
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <div class="nav">
+        <span @click="select=1" :class="[select==1?'active':'']">推荐音乐</span>
+        <span @click="select=2" :class="[select==2?'active':'']">排行榜</span>
+        <span @click="select=3" :class="[select==3?'active':'']">搜索</span>
+      </div> -->
+      <!-- 动态组件切换 -->
+      <div class="nav">
+        <span @click="changeTab='commend'" :class="[changeTab=='commend'?'active':'']">推荐音乐</span>
+        <span @click="changeTab='rank'" :class="[changeTab=='rank'?'active':'']">排行榜</span>
+        <span @click="changeTab='search'" :class="[changeTab=='search'?'active':'']">搜索</span>
+      </div>
+      <div>
+        <!-- <div v-show="select==1" class="content">推荐音乐的内容</div>
+        <div v-show="select==2" class="content">排行榜</div>
+        <div v-show="select==3" class="content">搜索的内容</div> -->
+        <!-- <commend v-if='select==1'></commend>
+        <rank  v-if='select==2'></rank>
+        <search  v-if='select==3'></search> -->
+        <!-- 再度优化，利用动态组件去进行组件的切换 -->
+        <!-- 动态组件切换这种方式很多，优化了代码，但是每一次都是重新创建，每切换一次都会触发前四个生命周期函数。为了解决这种浪费，我们可以把不变的组件缓存下来 -->
+        <keep-alive>
+                <component :is='changeTab'></component>
+        </keep-alive>
+
+      </div>
+    </div>
+    <template id='commend'>
+        <div>
+            <div class="content">我有好多推荐音乐</div>
+        </div>
+    </template>
+    <template id='rank'>
+        <div>
+            <div class="content">
+                我这里是各大排行榜
+                <h1>{{timer}}</h1>
+            </div>
+        </div>
+    </template>
+    <template id='search'>
+        <div>
+            <div class="content">搜索搜索</div>
+        </div>
+    </template>
+    <script>
+        const commend= {
+            template:'#commend',
+            created() {
+                console.log('推荐音乐')
+            },
+        }
+        const rank= {
+            template:'#rank',
+            data() {
+                return {
+                    timer:null
+                }
+            },
+            created() {
+                console.log('推荐音乐')
+
+                //我这个组件不能被缓存，我要解开缓存
+            },
+            activated() {
+                console.log('我的缓存，我给干掉了')
+                let date = new Date()
+                this.timer = date.toLocaleString()
+            },
+        }
+        const search= {
+            template:'#search',
+            created() {
+                console.log('搜索')
+            },
+        }
+      new Vue({
+        el: "#app",
+        data: {
+          select: 1,
+          changeTab:'commend'
+        },
+        components:{
+            commend,
+            rank,
+            search
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 
+    如果你的组件内容是不变的，我们为了防止浪费性能，我们可以缓存组件，
+用 <keep-alive></keep-alive> 它包裹的内容就会被缓存。缓存的时候，前四个生命周期函数，
+beforeCreate/created/beforeMount/mounted 都只触发一次
+但是有一些需求，要求组件是实时变化，那么我们就不能去缓存它，但是整体已经缓存了，怎么办？
+我们可以利用 activated(){} 这个函数去释放这个缓存 。因为这个函数即使在缓存状态下，依然会被触发。
+-->

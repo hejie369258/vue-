@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <my-footer></my-footer>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'蜀道难，难于上青天'
+            },
+            components:{
+                //创建一个底部组件
+                myFooter:{
+                    template:'<div><h1 @click="getMe">忽如一夜春风来</h1><h1>千树万树梨花开</h1><div>{{result}}</div></div>',
+                    methods: {
+                        //点击我的惊喜事件
+                        getMe(){
+                            alert('惊不惊喜！！！')
+                        }
+                    },
+                    computed: {
+                        result(){
+                            return 100
+                        }
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

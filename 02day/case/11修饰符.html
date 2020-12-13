@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 第一步引入核心文件  开发环境的核心库-->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      .red {
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin: 20px;
+      }
+      .small {
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin: 20px;
+      }
+      .bigBox {
+        width: 300px;
+        height: 300px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        修饰事件或者属性的一些方法 
+        创建事件=>事件传参=>事件源=>阻止事件和冒泡事件=>不同框架之间的方法
+        vue中常用的事件修饰符
+        .prevent 阻止默认事件
+        .stop 阻止冒泡事件
+        .once 只出现一次
+        .self 只触发自己
+        .capture 捕获
+    -->
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app">
+      <!-- 隐式传参 -->
+      <div @contextmenu="cMenu" class="red"></div>
+      <div @contextmenu.prevent="getInfo" class="red"></div>
+      <hr />
+      <div class="bigBox" @click="big">
+        <div class="small" @click.stop="small"></div>
+      </div>
+      <hr />
+      <div class="bigBox" @click.once="big1">
+        <div class="small" @click="small1"></div>
+      </div>
+      <hr />
+      <div class="bigBox" @click.self="big2">
+        <div class="small" @click="small2"></div>
+      </div>
+      <hr />
+      <div class="bigBox" @click.capture="big3">
+        <div class="small" @click="small3"></div>
+      </div>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app", //挂载点
+        data: {
+          //属性
+        },
+        methods: {
+          //原生js的阻止默认事件
+          cMenu(e) {
+            console.log("我是鼠标右键");
+            e.preventDefault();
+          },
+          //vue阻止默认事件
+          getInfo() {
+            console.log("我是菜单");
+          },
+          //大盒子事件
+          big() {
+            console.log("dadadada");
+          },
+          //小盒子事件
+          small() {
+            console.log("小盒子");
+          },
+          //大盒子事件
+          big1() {
+            console.log("dadadada11111");
+          },
+          //小盒子事件
+          small1() {
+            console.log("小盒子111");
+          },
+          //大盒子事件
+          big2() {
+            console.log("dadadada2222");
+          },
+          //小盒子事件
+          small2() {
+            console.log("小盒子22222");
+          },
+          //大盒子事件
+          big3() {
+            console.log("dadadada3333");
+          },
+          //小盒子事件
+          small3() {
+            console.log("小盒子33333");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

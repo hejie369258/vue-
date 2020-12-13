@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入核心库 -->
+    <!-- 先引入核心库 -->
+    <script src="./js/react.js"></script>
+    <!-- 引入dom库 -->
+    <script src="./js/react-dom.js"></script>
+  </head>
+  <body>
+    <!-- 创建一个容器 -->
+    <div id="box"></div>
+    <script>
+      let el = document.getElementById("box");
+      console.log(el, "谁");
+      //   let con = React.createElement('h1',null,'这个方式也是有点麻烦！！')
+      // let con = React.createElement('div',{className:'title'},'我是一个普通的标签！！！')
+      let con = React.createElement(
+        "div",
+        { className: "title" },
+        React.createElement("p", null, "我是一个段落")
+      );
+      //逻辑交互
+      //React 大的对象库
+      console.log(React, "核心库");
+      console.log(ReactDOM, "dom库");
+      //执行渲染函数
+      /*       render它一共有三个参数
+      第一个 你要渲染的内容
+      第二个 容器的位置
+      第三个 回调函数 callback 这个参数基本上不用，我们可以省略 */
+      // ReactDOM.render(con,el,()=>{})
+      ReactDOM.render(con, el);
+    </script>
+
+    <!-- 
+    Warning: Invalid DOM property `class`. Did you mean `className`?
+in div 
+class不能直接在react标签中使用，如果用样式类名，我们只能用className
+-->
+  </body>
+</html>

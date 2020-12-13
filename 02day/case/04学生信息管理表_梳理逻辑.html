@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>学生信息管理表</title>
+    <!-- 引入bootstrap样式 -->
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <!-- 引入核心库 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      [v-cloak]{
+        display: none;
+      }
+      .formInfo {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+       当页面疯狂刷新，出现闪屏如何解决？（面试题） 
+      解决方法两种：一、利用v-text,本身没有{{}} 那么就不会出现相关问题。
+      二、全局解决刷新闪频问题，指令v-cloak
+      -->
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app" v-cloak>
+      <!-- 利用bootstrap创建一个container -->
+      <div class="container">
+        <h3 class="text-center text-primary">学员信息输入</h3>
+        <form class="formInfo">
+          <div class="form-group">
+            <label for="username">姓名</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              v-model="userInfo.name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="age">年龄</label>
+            <input
+              type="text"
+              class="form-control"
+              id="age"
+              v-model="userInfo.age"
+            />
+          </div>
+          <div class="form-group">
+            <label for="telphone">电话</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telphone"
+              v-model="userInfo.telphone"
+            />
+          </div>
+          <div class="form-group">
+            <label for="remark">备注信息</label>
+            <textarea
+              name=""
+              id="remark"
+              cols="30"
+              rows="10"
+              v-model="userInfo.remark"
+            ></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" @click="add">
+            添加
+          </button>
+          <button type="button" class="btn btn-info" @click="reset">
+            重置
+          </button>
+        </form>
+        <h3 class="text-center text-primary">学员信息表</h3>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">序号</th>
+              <th scope="col">姓名</th>
+              <th scope="col">年龄</th>
+              <th scope="col">手机号</th>
+              <th scope="col">备注信息</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item,idx) in studentInfo">
+              <td>{{idx>8 ?idx+1:"0"+(idx+1)}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.age}}</td>
+              <td>{{item.telphone}}</td>
+              <td>{{item.remark}}</td>
+              <td>
+                <button type="button" class="btn btn-danger" @click='del(idx)'>删除</button>
+              </td>
+            </tr>
+            <tr>
+              <!-- <td colspan="6" v-if='studentInfo.length>0'>
+                <button type="button" class="btn btn-danger">全部删除</button>
+              </td>
+              <td colspan="6" v-if='studentInfo.length==0'>暂无数据</td> -->
+              <!-- v-if 和 v-else必须连着使用，否则不生效会报错 -->
+              <td colspan="6" v-if='studentInfo.length>0'>
+                <button type="button" class="btn btn-danger" @click='delAll'>全部删除</button>
+              </td>
+              <td colspan="6" v-else>暂无数据</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app", //挂载点
+        data: {
+          userInfo: {
+            name: "",
+            age: "",
+            telphone: "",
+            remark: "",
+          },
+          studentInfo: [
+            {
+              name: "张三",
+              age: 60,
+              telphone: 19877654567,
+              remark: "喜欢吃饭睡觉打王者",
+            },
+            {
+              name: "李四",
+              age: 60,
+              telphone: 19877654567,
+              remark: "喜欢吃饭睡觉打王者",
+            },
+            {
+              name: "王五",
+              age: 60,
+              telphone: 19877654567,
+              remark: "喜欢吃饭睡觉打王者",
+            },
+            {
+              name: "赵六",
+              age: 60,
+              telphone: 19877654567,
+              remark: "喜欢吃饭睡觉打王者",
+            },
+          ],
+        },
+        methods: {
+          //封装一个添加事件
+          add() {
+            //空判断
+            if(this.userInfo.name=='' || this.userInfo.age=='' || this.userInfo.telphone=='' || this.userInfo.remark==''){
+              alert('请输入所有必填项')
+              //return 如果用return，就可以不用加else
+            }else{
+                console.log(this, "学员输入信息");
+            //把数据输入对象添加到studentInfo这个数组中
+            this.studentInfo.push(this.userInfo);
+            //添加成功之后，我们要调用reset函数
+            this.reset()
+            }
+          
+          },
+          //重置输入框
+          reset() {
+            this.userInfo = {
+              name: "",
+              age: "",
+              telphone: "",
+              remark: "",
+            };
+          },
+          //删除事件
+          del(i){
+            console.log(i,'索引')
+            //删除数组中某一项
+            this.studentInfo.splice(i,1)
+          },
+          //删除所有事件
+          delAll(){
+            //清空数组内容
+            this.studentInfo=[]
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 学员信息表思路：
+一、利用UI框架搭建静态页
+二、把表格的数据转化成假数据,并循环遍历
+三、书写逻辑交互
+ -->

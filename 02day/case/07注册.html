@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步引入核心文件  开发环境的核心库-->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+        .err{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--
+         注册的思路：
+         后端要求传入的参数：
+         姓名：username
+         密码：password   password
+         性别：sex  男/女 ,一般情况后端接收的时候都是0 男/1 女 单选框
+         爱好：hobby [] 复选框
+         工作：job  下拉框
+         同意协议 isGree
+    -->
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app">
+        <div>
+            姓名：<input @blur='blur' type="text" v-model='regList.username'>
+            <p v-show='isErr' class="err">{{errInfo}}</p>
+        </div>
+        <div>
+            密码：<input type="password" v-model='regList.password'>
+        </div>
+        <div>
+            <!-- 单选框一定要写 value,且value是后端要去的数值 -->
+            性别：
+            <input type="radio" name='sex' value='0' v-model='regList.sex'> 男
+            <input type="radio" name='sex' value="1" v-model='regList.sex'> 女
+        </div>
+        <div>
+            <!-- 
+                复选框：定义checkbox初始值，应是一个[] ,获取值的时候，获取的是value 的值 
+                你也可以有默认值：eg:['play']
+            -->
+            <input type="checkbox" value='study' v-model='regList.hobby'>学习
+            <input type="checkbox" value='sleep' v-model='regList.hobby'>睡觉
+            <input type="checkbox" value='rap' v-model='regList.hobby'>唱歌
+            <input type="checkbox" value='play' v-model='regList.hobby'>打篮球
+
+        </div>
+        <div>
+            <!-- 
+                下拉框的双向数据绑定，绑定在select标签上。它的value 是option中的value
+             -->
+           工作种类： <select v-model='regList.job'>
+                <option value="" disabled>--请选择--</option>
+                <option value="java">码农后端</option>
+                <option value="web">大前端攻城狮</option>
+                <option value="test">最弱的测试</option>
+                <option value="ui">切图仔</option>
+            </select>
+        </div>
+        <div>
+            <!-- 一个checkbox 复选框，我们初始值可以为空，获取value的时候，是true或者false.我们的初始值也可以是true或者false -->
+            协议：<input type="checkbox" v-model='regList.isGree'>
+        </div>
+        <button @click='register'>注册</button>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',//挂载点
+            data:{//属性
+                isErr:false,
+                errInfo:'',
+                regList:{
+                    username:'',
+                    password:'',
+                    sex:0, //0 或者1
+                    hobby:[],
+                    job:'',
+                    isGree:true//默认值可以用true/false
+                }
+            },
+            methods: {
+                //封装一个注册事件
+                register(){
+                    console.log(this.regList,'注册列表')
+                    /*
+                     注册的逻辑
+                     前提是：当你失去焦点的时候要判空
+                     一、先判断是否勾选协议
+                    二、判断空值
+                    三以上都没有问题，我们调取接口
+                    */
+                },
+                //封装一个失去焦点的方法
+                blur(){
+                    if(this.regList.username==''){
+                        this.isErr = true
+                        this.errInfo = '请输入啥'
+                    }else{
+                        this.isErr = false
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

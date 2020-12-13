@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="inp" type="text" oninput="getInput()" />
+    <p id="pInfo"></p>
+    <script>
+      //创建一个默认值 相当于vue中的data属性
+      let obj = {
+        value: "默认值",
+      };
+      //定义变量 中间转化一下，映射
+      let _obj = {
+        value: "",
+      };
+      //对象属性的添加或者修改
+      Object.defineProperty(obj, "value", {
+        get() {
+          //取值
+          return _obj.value;
+        },
+        set(val) {
+          //设置
+          console.log(val, "6666");
+          _obj.value = val;
+          //重新修改页面
+          document.getElementById("inp").value = obj.value;
+          document.getElementById("pInfo").innerHTML = obj.value;
+        },
+      });
+      //创建一个 oninput事件
+      function getInput() {
+        //获取input的value把value的值赋值给p
+        // console.log(document.getElementById('inp').value,'值')
+        document.getElementById("pInfo").innerHTML = document.getElementById(
+          "inp"
+        ).value;
+        //把input的值实时赋值给 obj.value
+        obj.value = document.getElementById("inp").value;
+      }
+      //页面一加载的时候，把value赋值给input和p
+      document.getElementById("inp").value = obj.value;
+      document.getElementById("pInfo").innerHTML = obj.value;
+    </script>
+  </body>
+</html>
+
+<!-- 双向数据绑定
+视图影响数据
+数据的改变会影响视图
+ -->

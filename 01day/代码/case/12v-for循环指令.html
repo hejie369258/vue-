@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        <!-- v-for 这个指令指的是循环遍历 
+        in或者of ，一般我们经常用in 
+        v-for = '自定义变量 in/of 数组'
+        循环数组： 它有两个参数，第一个参数是数组中的每一项，一般用item。第二个参数是索引，一般我们用index表示
+        循环对象： 它有三个参数，第一个参数是对象中的value，一般可以用item/value。第二个参数是key值。第三个参数是索引
+        -->
+        <ul>
+            <!-- 循环谁，就在谁的身上加v-for -->
+            <!-- <li>海底捞</li>
+            <li>撸串儿</li> -->
+            <!-- <li v-for='item in foods'> -->
+            <li v-for='(item,index) in foods'>
+              {{index +1 }}---  {{item}}
+            </li>
+        </ul>
+        <!-- 循环对象 -->
+        <ul>
+            <li v-for='(item,a,idx) in obj'>{{item}}---{{a}}---{{idx}}</li>
+        </ul>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{ 
+                foods:['海底捞','撸串儿','生煎','螺蛳粉'],
+                obj:{
+                    name:'张三',
+                    age:18
+                }
+            }
+        })
+    </script>
+</body>
+</html>

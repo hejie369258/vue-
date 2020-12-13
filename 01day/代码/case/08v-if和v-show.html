@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 基本指令之 v-if 和 v-show
+    这两个属性用于条件判断 
+    面试题：v-if 和 v-show有什么区别？
+    相同点：都可以控制视图的显示隐藏
+    不同点：v-if属于惰性加载，相当于不加载，或者说删除了之前的DOM节点。
+    v-show在标签中添加了css样式。display:none。用样式控制它的显示隐藏
+    使用场景： 疯狂操作显示隐藏的时候，用v-show。页面一加载就用于判断的用v-if比如：购物车
+-->
+
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+      {{msg}}
+      <hr />
+      <h2 v-if="true">{{info}}</h2>
+      <h2 v-if="false">{{info1}}</h2>
+      <h2 v-show="true">{{info2}}</h2>
+      <h2 v-show="false">{{info3}}</h2>
+      <div v-if='cartList.length==0'>
+          购物车空空如也！！！快去买买买
+      </div>
+      <div v-if='cartList.length>0'>
+          商品名称：{{cartList[0].name}}
+      </div>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          //并不需要我们用 var 或者let。它是声明式，我们直接定义属性，在视图中可以利用{{}}去渲染相关的变量
+          msg: "测试。。。。",
+          info: "晨兴理荒秽",
+          info1: "带月荷锄归",
+          info2: "种豆南山下",
+          info3: "草盛豆苗稀",
+          cartList:[
+            //   {
+            //       name:'iPhone12pro'
+            //   }
+          ]//购物车
+        },
+      });
+    </script>
+  </body>
+</html>

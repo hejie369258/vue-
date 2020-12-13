@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <input type="text" v-model='food[1]'>{{food[1]}}
+        <hr>
+        <input type="text" v-model='obj.name'>{{obj.name}}
+        <hr>
+        <input type="text" v-model='songList[0].name'>{{songList[0].name}}
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'今天是周一',
+                food:['宫保鸡丁','锅包rou','醋溜白菜','大米粥'],
+                obj:{
+                    name:'李白',
+                    age:1000
+                },
+                songList:[
+                    {
+                        name:'丑八怪',
+                        singger:'薛之谦'
+                    }
+                ]
+            },
+            watch:{
+                food(newVal,oldVal){
+                    console.log(newVal,'new')
+                    console.log(oldVal,'old')
+                },
+                //监听对象
+/*                 obj(newVal,oldVal){
+                    console.log(newVal,'new')
+                    console.log(oldVal,'old')
+                }
+                这种方式不能监听到对象的变化 */
+                obj:{
+                    deep:true,//deep 深度
+                    handler(newVal){
+                        console.log(newVal,'new')
+                        console.log(newVal.name,'new')
+                    }
+                },
+                songList:{
+                   deep:true,
+                   handler(newVal){
+                    console.log(newVal[0].name,'new')
+                   }
+                },
+            }
+        })
+    </script>
+</body>
+</html>

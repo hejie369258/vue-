@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/react.js"></script>
+    <script src="./js/react-dom.js"></script>
+    <!-- jsx语法糖浏览器无法解析，所以我们必须要引入babel转译 -->
+    <script src="./js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script type="text/babel">
+      //jsx特点，把js和html 混合使用
+      //jsx语法糖规定只能有一个根元素 root
+      //jsx语法糖一定要有一个闭合标签
+      //jsx语法糖，它遇见<>它会自动解析成html标签遇见{} 会解析成js语法
+      //逻辑交互
+      let el = document.getElementById("box");
+      //字符串
+      let str = "字符串";
+      //number
+      let num = 100;
+      //Boolean
+      let flag = true;
+      let newDetail = (
+        <div>
+          <h1>周五</h1>
+          <p>我可太开心！！！！</p>
+        </div>
+      );
+      //对象
+      let obj = {
+        name: "阿狗",
+        age: 100,
+      };
+      //简单数组
+      let arr = ["破小鱼", "剩炒饭", "腥鸡丁", "小焖面"];
+      let con = (
+        <div>
+          <div>字符串： {str}</div>
+          <div>数值：{num}</div>
+          <div>{!flag ? "今天周五" : "反正还是要写项目"}</div>
+          <div>{flag ? newDetail : "反正还是要写项目"}</div>
+          <h1>姓名：{obj.name}</h1>
+          <h1>姓名：{obj.age}</h1>
+          <h2>{arr[2]}</h2>
+          <ul>{arr.map((item,index)=>{
+              return <li key={item}>{item}</li>
+          })}</ul>
+        </div>
+      );
+      //渲染
+      ReactDOM.render(con, el);
+    </script>
+  </body>
+</html>
+<!-- react-dom.js:82 Warning: Invalid DOM property `for`. Did you mean `htmlFor`?
+    in label
+    in div
+    in div -->

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        bind 绑定  
+        v-bind 动态绑定 
+        可以简写成：
+    -->
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        {{msg}}
+        <hr>
+        <div>
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603962395476&di=cc420f1e534b472ecf5b65a5f4b25c5d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201802%2F18%2F20180218141335_ikrHl.jpeg" alt="">
+        </div>
+        <div>
+            <img v-bind:src="img" alt="">
+            <!-- v-bind: 有一点麻烦，我们可以简写成 : -->
+            <img :src="imgUrl" alt="">
+        </div>
+        <hr>
+        <a href="http://www.jd.com">去买买买</a>
+        <hr>
+        <a :href="url">哈哈哈哈s</a>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{ //并不需要我们用 var 或者let。它是声明式，我们直接定义属性，在视图中可以利用{{}}去渲染相关的变量
+            msg:'测试。。。。',
+            img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603962395476&di=cc420f1e534b472ecf5b65a5f4b25c5d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201802%2F18%2F20180218141335_ikrHl.jpeg',
+            imgUrl:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2462546425,2102970500&fm=26&gp=0.jpg',
+            url:'http://www.ujiuye.com'
+            }
+        })
+    </script>
+</body>
+</html>

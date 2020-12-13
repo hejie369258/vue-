@@ -1,0 +1,2 @@
+联想列表：http://suggestion.baidu.com/su?cb=callback&wd=
+搜索列表：http://www.baidu.com/s?wd=

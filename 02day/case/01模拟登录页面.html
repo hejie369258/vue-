@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步引入核心文件  开发环境的核心库-->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app">
+        <!-- <h1>{{msg}}</h1> -->
+        <div>
+            用户名：<input type="text" v-model='userInfo.username'>
+        </div>
+        <div>
+            密码：<input type="text" v-model='userInfo.password'>
+        </div>
+        <button @click='login'>登录</button>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',//挂载点
+            data:{//属性
+                msg:'今天是周末！！！',
+                name:'',
+                pass:'',
+                userInfo:{
+                    username:'',
+                    password:''
+                }
+            },
+            methods: {
+                //封装一个登录事件
+                login(){
+                    /* 思路逻辑
+                    对于表单提交信息，后端一定会对提交的参数进行验证。无论后端做什么验证，我们前端一定要对空，进行判断拦截。目的是为了防止无效的去交互服务器
+                    */
+                    // console.log(this.name,'用户名')
+                    // console.log(this.pass,'密码')
+                    //console.log(this.userInfo,'提交的表单对象')
+                    //我后端规定 用户名：username 密码：password
+                    // $.ajax({
+                    //     // data:{
+                    //     //     username:this.name,
+                    //     //     password:this.pass
+                    //     // },
+                    //     data:this.userInfo,
+                    //     type:'post',
+                    //     success:()=>{
+
+                    //     }
+                    // })
+
+                    //正规的表单提交流程
+                    //空判断
+                    if(this.userInfo.username==''||this.userInfo.password==''){
+                        alert('用户名或者密码不能为空')
+                    }else{
+                        console.log(this.userInfo,'提交的对象信息')
+                        //调用登录接口
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{allNum}}
+        <hr>
+        <h1>{{allSum}}</h1>
+    </div>
+    <script>
+       let vm= new Vue({
+            el:'#app',
+            data:{
+                msg:'今天是周一',
+                xName:100
+            },
+            computed:{
+                allNum(){
+                    return 100
+                },
+                allSum:{
+                    get(){
+                        return this.xName
+                    },
+                    set(val){
+                        console.log(val,'设置的值')
+                        this.xName = val
+                    }
+                }
+            }
+        })
+        vm.allSum = 500
+    </script>
+</body>
+</html>
+
+<!-- allNum(){
+    return 100
+},
+这种写法，相当于
+allSum:{
+    get(){
+        return this.xName
+    }
+} -->

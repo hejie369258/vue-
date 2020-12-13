@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in newsList">
+          <p>新闻标题：{{item.title}}</p>
+          <p>发表时间:{{item.pTime | toTime('yyyy-MM-dd HH:mm:ss')}}</p>
+          <p>发表时间:{{item.pTime | toTime('yyyy/MM/dd HH:mm:ss')}}</p>
+          <p>发表时间:{{item.pTime | toTime}}</p>
+          <p>单价：{{item.price | toPrice}}</p>
+        </li>
+      </ul>
+    </div>
+    <script>
+      //字符串补位的方法  padStart() 在字符串前面补位  padEnd 在字符串结尾补位
+      // let str = '你好'
+      // let result = str.padStart(5,'x')
+      // let result1 = str.padEnd(6,'x')
+      //创建全局过滤器
+      Vue.filter("toTime", (timer,type) => {
+        let date = new Date(timer);
+        //获取年份
+        let year = date.getFullYear();
+        //获取月份
+        let month =((date.getMonth() + 1)+'').padStart(2,'0')
+        //获取天数
+        let day = (date.getDate() +'').padStart(2,'0')
+        let hour = (date.getHours() +'').padStart(2,'0')
+        let minute = (date.getMinutes() +'').padStart(2,'0')
+        let second = (date.getSeconds() +'').padStart(2,'0')
+        console.log(day);
+        //return `${year}/${month}/${day}`
+        if(type=='yyyy-MM-dd HH:mm:ss'){
+            return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+        }else if(type=='yyyy/MM/dd HH:mm:ss'){
+            return `${year}/${month}/${day} ${hour}:${minute}:${second}`
+        }else{
+             return `${year}-${month}-${day}`
+        }
+       
+      });
+      Vue.filter("toPrice",(n)=>{
+          return n.toFixed(2)
+      })
+      new Vue({
+        el: "#app",
+        data: {
+          newsList: [
+            {
+              id: 1,
+              title: "华春莹怼蓬佩奥，以彼之句式还施彼身！",
+              pTime: 1604374197699, //发表时间
+              price:99
+            },
+            {
+              id: 2,
+              title: "外交部回应在美记者签证实际延期仅三天",
+              pTime: 1608374197699, //发表时间
+              price:1999
+            },
+            {
+              id: 3,
+              title: "北京新增2例境外输入新冠肺炎确诊病例和1例无症状感染者",
+              pTime: 1614374197699, //发表时间
+              price:799
+            },
+            {
+              id: 4,
+              title: "谭德塞被确认为新冠阳性病例接触者后，世卫组织回应",
+              pTime: 1623374197699, //发表时间
+              price:886
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>

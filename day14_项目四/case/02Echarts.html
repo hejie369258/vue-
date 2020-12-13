@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>echart案例</title>
+    <!-- 第一步先引入 -->
+    <script src="./node_modules/echarts/dist/echarts.min.js"></script>
+    <style>
+        #container{
+            width: 700px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 二、创建容器，并指定其大小 -->
+    <div id="container"></div>
+    <!-- 三逻辑交互 -->
+    <script>
+        //1初始化
+      let myChart =  echarts.init(document.getElementById('container'))
+
+      //创建图表配置项
+      let options = {
+        title: {
+                text: '双11销售量' //标题
+            },
+            tooltip: {},
+            legend: { //图例 这个东西一定要和你数据中的name属性一致
+                data:['销售量']
+            },
+            xAxis: { //x轴坐标
+                data: ["苹果","梨","榴莲","车厘子","橘子"]
+            },
+            yAxis: {},
+            series: [{ //数据列
+                name: '销售量',
+                type: 'bar',
+                data: [15, 200, 360, 100, 100, 250]
+            }]
+      }
+      //给容器设置配置项
+      myChart.setOption(options)
+    </script>
+</body>
+</html>

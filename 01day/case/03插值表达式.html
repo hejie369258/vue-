@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入vue核心库 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 第二步创建一个容器，并指定其唯一id -->
+    <div id="app">
+        <!-- {{}} 插值表达式 在这里不能写复杂的语句，比如for ,switch...
+        但是我们可以写三元（三目）运算 -->
+        <h1>{{msg}}</h1>
+        <hr>
+        <h2>
+            我喜欢一首诗，{{msg}}
+        </h2>
+        <hr>
+        <h2>
+            {{"我喜欢一首诗,"+msg}}
+        </h2>
+        <hr>
+        <h2>{{flag?info:msg}}</h2>
+        <h2>{{!flag?info:msg}}</h2>
+        <h2>{{1==1?'大前端':'小码农'}}</h2>
+        <hr>
+        <h3>我购买的数量是---{{num}}</h3>
+        <hr>
+        <h2>我的名字是---{{obj.name}},年龄---{{obj.age}}</h2>
+        <hr>
+        <!-- 实际上数组的渲染，肯定不会这么去渲染，因为数组的值你不确定，索引也不确定 -->
+        <h1>我最讨厌吃：{{foods[3]}}</h1>
+    </div>
+    <!-- 在挂载容器之外，执行的是html，原样输出
+    <h2>{{msg}}</h2> -->
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',//挂载点
+            data:{//属性 数值，布尔，字符串，数组，对象
+                //这里的数据未来都是来自，Java或者php返回的数值
+                msg:'晨兴理荒秽',
+                info:'带月荷锄归',
+                flag:true,
+                num:10,
+                obj:{
+                    name:'陶渊明',
+                    age:50
+                },
+                foods:['炸鸡柳','木耳炒银耳','芹菜炒腐竹','西红柿炒鸡蛋'],
+                songList:[]
+            }
+        })
+    </script>
+</body>
+</html>

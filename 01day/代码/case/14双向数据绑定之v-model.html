@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- v-model 这个指令用在表单标签
+    input select...
+    -->
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        <input type="text" v-model='val'>
+        {{val}}
+        <button @click='search'>搜索</button>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                val:'老王'
+            },
+            methods: {
+                search(){
+                    console.log(this.val)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

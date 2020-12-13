@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top:50px;
+            left:100px
+        }
+        .aa-leave{
+            left:100px;
+            transform: rotate(0deg);
+        }
+        .aa-leave-active{
+            transition: all 1s;
+        }
+        .aa-leave-to{
+            left:1000px;
+            transform: rotate(720deg);
+        }
+        .aa-enter{
+            left: 800px;
+            transform: scale(0.2,0.2);
+        }
+        .aa-enter-active{
+            transition: all 1.5s;
+        }
+        .aa-enter-to{
+            left: 20px;
+            top: 200px;
+            transform: scale(2,2);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click='isShow=!isShow'>点击我有惊喜</button>
+        <!-- vue中提供一个属性，叫过渡动画，你要给谁加过渡动画，就在谁的外层加 transtion 标签。在transition中有一个name属性，name属性当做class去使用-->
+        <transition name='aa'>
+                <div v-show='isShow' class="box"></div>
+        </transition>
+
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                isShow:true
+            }
+        })
+    </script>
+</body>
+</html>

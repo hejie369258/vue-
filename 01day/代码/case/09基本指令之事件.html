@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- v-on: 事件绑定    我们简写成@
+    在vue中，事件名称后面的（）,可加可不加
+    -->
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+      {{msg}}
+      <hr />
+      <button v-on:click="getInfo()">点击我有惊喜</button>
+      <hr />
+      <!-- 箭头函数写法 -->
+      <button v-on:click="getDetail()">点击我</button>
+      <hr />
+      <button v-on:click="getAny()">点击我。。。。</button>
+      <hr />
+      <hr />
+      <!-- 以上的事件方法有点麻烦，简写 -->
+      <button @click="getAny">我最简单</button>
+      <hr />
+      <!-- 再简写，当你的事件执行逻辑只有一句时，可以省略事件方法 -->
+      <button @click="isShow = !isShow">哈哈哈哈哈哈哈</button>
+      <div v-show="isShow" class="box"></div>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          //并不需要我们用 var 或者let。它是声明式，我们直接定义属性，在视图中可以利用{{}}去渲染相关的变量
+          msg: "测试。。。。",
+          isShow: true,
+        },
+        methods: {
+          //这里可以用多个方法
+          getInfo: function () {
+            console.log(this, "惊喜");
+            //让小盒子消失
+            this.isShow = false;
+          },
+          /*         getDetail: () => {
+              //这个个写法，this指向了window,基本上没有一个人用这个简写
+            console.log(this,"哈哈");
+          }, */
+          getAny() {
+            console.log(this, "呵呵");
+            //this.isShow = false
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.js"></script>
+    <script src="./js/react-dom.js"></script>
+    <!-- jsx语法糖浏览器无法解析，所以我们必须要引入babel转译 -->
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="box"></div>
+    <script type='text/babel'>
+    //jsx特点，把js和html 混合使用
+    //jsx语法糖规定只能有一个根元素 root
+    //jsx语法糖一定要有一个闭合标签
+        //逻辑交互
+        let el = document.getElementById('box')
+        // let con =<div> <div>我是一个段落</div>
+        // <div>555</div></div>
+        let con = (<div>
+            <div>被优雅的小阔号包裹</div>
+            <div>
+                <label htmlFor="inp">点我点我</label>
+                <input id='inp' type="text"/>
+            </div>
+            </div>)
+        //渲染
+        ReactDOM.render(con,el)
+    </script>
+</body>
+</html>
+<!-- react-dom.js:82 Warning: Invalid DOM property `for`. Did you mean `htmlFor`?
+    in label
+    in div
+    in div -->

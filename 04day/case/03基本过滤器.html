@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <h1>{{str}}</h1>
+        <h1>全部转化成大写---{{str | toUpper}}</h1>
+        <h2>{{name|toUpper}}</h2>
+        <hr>
+        <h1>{{price}}</h1>
+        <h2>全部加两位小数点----{{price|toPrice(3)}}</h2>
+        <h3>{{allPrice|toPrice(2)}}</h3>
+    </div>
+    <div id="box">
+        <!-- 每一个vue实例都是独立的个体，自己的data只能自己使用 -->
+        <hr>
+        <h1>{{str}}</h1>
+        <h1>{{name | toUpper}}</h1>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'蜀道难，难于上青天',
+                str:'liBai',
+                name:'laoDEnGzi',
+                price:999,
+                allPrice:1000
+            },
+            filters:{//可以创建多个局部过滤器
+                toUpper(n){
+                    //第一个参数是要过滤的内容
+                    //这里面去操作要过滤的内容
+                    console.log(n,'n是谁')
+                    return n.toUpperCase()
+                },
+                toPrice(n,m){
+                    console.log(n,'内容')
+                    console.log(m,'sei')
+                    return n.toFixed(m)
+                }
+            }
+        })
+
+        new Vue({
+            el:'#box',
+            data:{
+                str:'111',
+                name:'taoYuanming'
+            },
+            filters:{
+                toUpper(n){
+                    return n.toUpperCase()
+                },
+            }
+        })
+    </script>
+</body>
+</html>

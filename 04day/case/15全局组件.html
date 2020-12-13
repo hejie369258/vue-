@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <com-component></com-component>
+        <!-- <one></one> -->
+    </div>
+    <template id="one">
+        <div>
+            <h1>哈哈哈哈 我一个局部组件</h1>
+            <h2>我是全局组件</h2>
+        </div>
+    </template>
+    <div id="box">
+        <hr>
+        <!-- <one></one> -->
+        <com-component></com-component>
+    </div>
+    <script>
+        Vue.component('comComponent',{
+            template:'#one'
+        })
+        new Vue({
+            el:'#app',
+            data:{
+            },
+            // components:{
+            //     one:{
+            //         template:'#one'
+            //     }
+            // }
+        })
+        new Vue({
+            el:'#box',
+            data:{
+            },
+            // components:{
+            //     one:{
+            //         template:'#one'
+            //     }
+            // }
+        })
+    </script>
+</body>
+</html>

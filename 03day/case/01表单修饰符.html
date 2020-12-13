@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        用来修饰表单v-model属性 
+        .lazy 延迟加载,相对多一些。当失去焦点的时候再把input内容渲染到模板种
+        .trim 去掉收尾空格
+        .number 只显示数值,前提是必须以数字开头，那么最终渲染结果只渲染数值，如果以非数值开头，渲染内容原样渲染
+    -->
+    <div id="app">
+        {{msg}}
+        <hr>
+        <input type="text" v-model.lazy='value'> {{value}}
+        <hr>
+        <input type="text" v-model.trim='val'>{{val}}
+        <hr>
+        <input type="text" v-model.number='num'>{{num}}
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'今天是周一',
+                value:'',
+                val:'',
+                num:''
+            }
+        })
+    </script>
+</body>
+</html>

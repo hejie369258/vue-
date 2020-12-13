@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <button @click="isShow=!isShow">点击我切换</button>
+      <transition
+        enter-active-class="animate__animated animate__lightSpeedInRight"
+      >
+        <h1 v-show="isShow">{{msg}}</h1>
+      </transition>
+      <transition
+        enter-active-class="animate__animated animate__rotateOutDownLeft"
+      >
+        <h1 v-show="!isShow">{{info}}</h1>
+      </transition>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          isShow: true,
+          msg: "蜀道难，难于上青天",
+          info: "西出阳关无故人",
+        },
+      });
+    </script>
+  </body>
+</html>

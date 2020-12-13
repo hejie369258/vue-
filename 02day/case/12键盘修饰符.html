@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步引入核心文件  开发环境的核心库-->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        键盘修饰符
+        .enter 回车 .13
+        .left .37
+        .right .39
+        .up .38
+        .down .40
+        .del .46
+        .space .32
+
+     -->
+    <!-- 第二步创建一个容器，并指定其id -->
+    <div id="app">
+        <input type="text" @keyup='enter'>
+        <hr>
+        <input type="text" @keyup.enter='getInfo'>
+        <input type="text" @keyup.37='getDetail'>
+    </div>
+    <!-- 第三步 逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',//挂载点
+            data:{//属性
+            },
+            methods: {
+                enter(e){
+                    console.log(e.keyCode,'eeee')
+                    if(e.keyCode===13){
+                       
+                        console.log(e.target.value,'eeee')
+                    }
+                },
+                getInfo(){
+                    console.log('1111')
+                },
+                getDetail(){
+                    console.log('我是键盘左边')
+                },
+            },
+        })
+    </script>
+</body>
+</html>

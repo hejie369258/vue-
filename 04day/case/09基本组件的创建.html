@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <one></one>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'蜀道难，难于上青天'
+            },
+            components:{//创建多个组件
+                one:{
+                    template:'<div>我是一个小组件</div>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

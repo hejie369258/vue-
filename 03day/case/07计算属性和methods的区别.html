@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        计算属性和methods之前的区别 
+        相同点：都是通过return返回数据且都是相关依赖发生变化，值也会跟着变化
+        不同点： 计算属性是有缓存作用的，如果依赖没有发生变化，它只执行一次，而方法是调用几次执行几次。计算属性极大的提高渲染速率
+        使用场景：有交互事件的时候，我们可以选择methods.如果有大量的数据交互，而且调用多遍我们可以选取计算属性computed
+    -->
+    <div id="app">
+        {{msg}}
+        <button @click='num=num+1'>点击我有惊喜</button>
+        <hr>
+        <!-- 方法 -->
+        {{allSum()}}
+        {{allSum()}}
+        {{allSum()}}
+        <hr>
+        <!-- 在计算属性 -->
+        {{allPrice}}
+        {{allPrice}}
+        {{allPrice}}
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'今天是周一',
+                num:100
+            },
+            methods: {
+                allSum(){
+                    console.log('我是方法')
+                    return this.num
+                }
+            },
+            computed: {
+                allPrice(){
+                    console.log('我是计算属性')
+                    return this.num
+                }
+            },
+        })
+    </script>
+</body>
+</html>

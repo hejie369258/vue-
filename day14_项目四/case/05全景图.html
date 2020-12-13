@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 一定要利用百度的再API地址 -->
+    <script src="http://api.map.baidu.com/api?v=3.0&ak=GeSH955XkYRLGjfFKwrupr9TGWGZygfX"></script>
+    <style>
+      #con {
+        width: 900px;
+        height: 700px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="con"></div>
+    <div>
+      <input id="inp" type="text" />
+    </div>
+    <button id="btn">搜索景点</button>
+    <hr>
+    <div>
+     起始点： <input id="inp1" type="text" />
+    </div>
+    <div>
+     终点： <input id="inp2" type="text" />
+    </div>
+    <button id="btn1">腿儿着去</button>
+    <script>
+      //实例化map
+      let map = new BMap.Map("con");
+      //设置经纬度
+      let point = new BMap.Point(116.403963, 39.915119);
+      // 设置中心坐标点
+      map.centerAndZoom(point, 15);
+      //设置滚轮鼠标
+      map.enableScrollWheelZoom();
+      //添加控件
+      map.addControl(new BMap.NavigationControl());
+      // 覆盖区域图层测试
+      map.addTileLayer(new BMap.PanoramaCoverageLayer());
+
+      var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+      stCtrl.setOffset(new BMap.Size(20, 20));
+      map.addControl(stCtrl); //添加全景控件
+      //检索服务
+      var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map },
+      });
+      // local.search("后海");
+
+      //获取inputvalue
+      let inp = document.getElementById("inp");
+      let btn = document.getElementById("btn");
+      btn.onclick = () => {
+        local.search(inp.value);
+      };
+
+      //步行规划路线
+      var walking = new BMap.WalkingRoute(map, {
+        renderOptions: { map: map, panel: "r-result", autoViewport: true },
+      });
+      //公交车
+      var transit = new BMap.TransitRoute(map, {
+		renderOptions: {map: map, panel: "r-result"}
+	});
+      
+      let inp1 = document.getElementById("inp1");
+      let inp2 = document.getElementById("inp2");
+      let btn1 = document.getElementById("btn1");
+      btn1.onclick = () => {
+        console.log('chehe')
+       // walking.search(inp1.value, inp2.value);
+       transit.search(inp1.value, inp2.value);
+      };
+
+    </script>
+  </body>
+</html>

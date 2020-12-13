@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 学习事件的一个流程，如何定义事件=>如何传递参数=>如何获取事件源=>事件模型（事件流） -->
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        <!-- 当传参的时候，要带（） -->
+        <button @click='getInfo("我是参数",100)'>点击我</button>
+        <!-- 接收事件源 -->
+        <hr>
+        <!-- 不带小括号获取事件源 -->
+        <button @click='getEvent'>获取事件源</button>
+        <hr>
+        <!-- 带小括号触发事件源 -->
+        <button @click='getEv($event)'>获取事件源啊啊啊啊啊</button>
+        <hr>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{ 
+            },
+            methods: {
+                getInfo(m,n){
+                    console.log(m,n,'接收到的参数')
+                },
+                getEvent(e){
+                    console.log(e,'事件源')
+                },
+                //带小括号获取事件源
+                getEv(e){
+                    console.log(e,'哈哈哈哈')
+                    //原生js 阻止默认事件
+                    // e.preventDefault();
+                    //阻止冒泡事件
+                    // e.stopPropagation();
+                }
+            },
+        })
+    </script>
+</body>
+</html>

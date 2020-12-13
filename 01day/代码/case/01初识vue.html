@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入核心库 -->
+    <!-- cdn方式 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- 第二种引入js文件 -->
+    <!-- <script src="./js/vueDev.js"></script> -->
+    <!-- 第三种npm管理插件 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 第二步创建一个容器，用来承载vue的视图 -->
+    <div id="box">
+        {{msg}}
+    </div>
+    <!-- 第三步 交互逻辑 -->
+    <script>
+        // console.log(Vue,'核心方法')
+        // Vue是一个构造函数，实例它
+        new Vue({
+            el:'#box',//el元素 element 
+            data:{//数据，属性
+                msg:'我觉得vue真简单啊'
+            }
+        })
+    </script>
+</body>
+</html>

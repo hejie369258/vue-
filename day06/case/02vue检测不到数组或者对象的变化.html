@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{obj}}
+      <h1>姓名：{{obj.name}}</h1>
+      <h1>年龄：{{obj.age}}</h1>
+      <button @click='addProp'>点击我加一个属性</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          obj:{
+            name:'张三',
+            age:50
+          }
+        },
+        methods: {
+          addProp(){
+/*             this.obj.sex='女'
+            console.log(this.obj) 
+            这种方法不能渲染到界面中
+            */
+           console.log(this,'实例')
+           console.log(this.obj,'对象')
+           this.$set(this.obj,'sex','男')
+           this.$set(this.obj,'info','爱学习')
+           Vue.set(this.obj,'hobby','学习')
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
+<!-- 
+  每一个对象都有一个get set方法 
+一般管它叫，getter和setter
+-->

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      .select {
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <!-- 
+    百度搜索数据思路： 
+    一、我们要监听到用户实时输入的数据同时我们要实时调取接口
+    二、把调取接口之后的返回值渲染到页面中
+    调取接口面临着跨域问题：调取ajax的时候
+    解决跨域问题的方法？？？
+    ①谁去解决跨域问题？
+    首先要分环境，在生产环境下出现跨域问题，前端无法解决，必须由后端去解决，在Nignx上解决（Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器）
+    ②在开发环境下，出现跨域问题，前端解决
+    jsonp可以解决跨域问题，但是在真正的项目很少用
+    webpack可以解决跨域，这个方法是我们在做项目框架的过程中经常的用的方法，只做代码配置
+    三、当前百度案例调取接口，我们选择没有跨域问题的方式
+    jsonp
+    四、jsonp的原理是什么？   src href这些属性没有跨域问题
+    ①创建一个script标签
+     let script = document.createElement('script')
+     ② 创建src属性
+     script.src = 'url地址'
+     ③把创建好的标签插入body中
+     document.body.appendChild(script)
+-->
+
+  <body>
+    <div id="app">
+      <div>
+        请输入搜索内容：
+        <input
+          type="text"
+          v-model="val"
+          @keydown.down="down"
+          @keydown.up="up"
+          @keydown.enter="enter"
+        />
+      </div>
+      <!-- 循环遍历搜索结果 -->
+      <ul>
+        <!-- i <4  0 1 2 3  -->
+        <li :class="[i==num?'select':'']" v-for="(item,i) in arr" v-if="i<4">
+          {{item}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "今天是周一",
+          val: "",
+          arr: [],
+          num: -1,
+        },
+        methods: {
+          //键盘下箭头事件
+          down() {
+            console.log(this.num, "初始");
+            if (this.num >= 4) {
+              this.num = 0;
+              return;
+            }
+            this.num++;
+            console.log(this.num, "更新");
+          },
+          //键盘上箭头事件
+          up() {
+            if (this.num < 0) {
+              this.num = 3;
+              return;
+            }
+            this.num--;
+          },
+          //回车事件，当用enter的时候跳转到搜索结果
+          enter() {
+            //跳转链接
+            //搜索列表：http://www.baidu.com/s?wd=
+            // window.open() 在新页面打开链接
+            // window.open('http://www.baidu.com/s?wd='+this.arr[this.num])
+            //window.location.href属性在当前页面打开链接
+            window.location.href =
+              "http://www.baidu.com/s?wd=" + this.arr[this.num];
+          },
+        },
+        watch: {
+          //axios 它是基于node.js开发的http库
+          val(newVal, oldVal) {
+            //剔除空值
+            if (newVal == "") {
+              this.arr = [];
+              return;
+            }
+            console.log(newVal, "新值");
+            //调用jsonp接口
+            //创建script标签
+            let script = document.createElement("script");
+            //添加src属性
+            script.src = "http://suggestion.baidu.com/su?cb=aa&wd=" + newVal;
+            //把创建好的标签插入到body中
+            document.body.appendChild(script);
+          },
+        },
+      });
+      //创建一个函数aa
+      function aa(res) {
+        console.log(res, "调取接口之后返回的结果");
+        vm.arr = res.s;
+      }
+    </script>
+  </body>
+</html>

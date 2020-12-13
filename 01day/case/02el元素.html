@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el元素</title>
+    <!-- 第一步引入核心库 -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 第二步 创建一个容器 -->
+    <!-- <div class="app"> -->
+    <div id="app">{{msg}}</div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+      new Vue({
+        //el:"body",不能用html或者body作为挂载点
+        //el:'.app', 不能用class作为挂载点，因为class不是唯一的。页面可以实例化多个，最终用class只能渲染一个
+        el:'#app',//挂载点
+        data: {
+          msg: "种豆南山下",
+        },
+      });
+    </script>
+  </body>
+</html>

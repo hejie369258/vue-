@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <h1>转化之后的结果 ---{{msg|toStr(3)}}</h1>
+    </div>
+    <div id="box">
+        <h1>{{msg}}</h1>
+        <h1>转化之后的结果 ---{{msg|toStr(4,6)}}</h1>
+    </div>
+    <script>
+        //先去在实例中调用
+        //全局过滤器 Vue.filter() 它有两个参数，第一个参数是你要过滤的内容，第二个参数是你的逻辑函数，这个函数有两个参数，①要过滤的内容，②要过滤内容的传参
+        Vue.filter('toStr',(n,m)=>{
+            //substr  substring  slice  字符串截取的方法
+            //return n.substr(2,3)
+            //return n.slice(3)
+            return n.substring(m)
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'蜀道难，难于上青天'
+            }
+        })
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'君不见高堂明镜悲白发'
+            }
+        })
+    </script>
+</body>
+</html>

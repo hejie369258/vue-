@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <one></one>
+        <two></two>
+        <hr>
+        <one></one>
+        <hr>
+    </div>
+    <template id="one">
+        <div>
+            <h1>我是组件一,我是新闻列表</h1>
+            <ul>
+                <li v-for='item in newInfo'>
+                    新闻标题：{{item.title}}
+                </li>
+            </ul>
+        </div>
+    </template>
+    <template  id="two">
+        <div>
+            <h1>我是组件二</h1>
+            <hr>
+            <input type="text" v-model='val'>{{val}}
+        </div>
+    </template>
+    <script>
+        //创建一个变量，变量中含有组件的属性和方法
+        const one = {
+            template:'#one',
+            data(){
+                return{
+                    newInfo:[
+                        {
+                            title:'美国大选要开始了',
+                            info:'奥巴马亲自站台拜登'
+                        },
+                        {
+                            title:'美国大选要开始了111',
+                            info:'奥巴马亲自站台拜登111'
+                        },
+                        {
+                            title:'美国大选要开始了222',
+                            info:'奥巴马亲自站台拜登333'
+                        }
+                    ]
+                }
+            }
+        }
+        const two = {
+            template:'#two',
+            data(){
+                return{//初始化data属性
+                    val:''
+                }
+            },
+            watch: {
+                
+            },
+            computed: {
+                
+            },
+            filters:{
+
+            },
+            methods: {
+                
+            },
+            components:{
+
+            }
+        }
+        new Vue({
+            el:'#app',
+            data:{
+            },
+            components:{
+                //当key值和value值一样的时候，我们可以省略
+                one,
+                two
+            }
+        })
+    </script>
+</body>
+</html>

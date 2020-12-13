@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <div class="container">
+      <h3 class="text-center text-primary">购物车列表</h3>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>
+              全选
+              <input type="checkbox" />
+            </th>
+            <th>商品</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item,i) in goodsList">
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <img :src="item.img" alt="" />
+              {{item.name}}
+            </td>
+            <td>{{item.price.toFixed(2)}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" @click="sub(i)">
+                -
+              </button>
+              {{item.num}}
+              <button type="button" class="btn btn-success" @click="add(i)">
+                +
+              </button>
+            </td>
+            <td>{{(item.price*item.num).toFixed(2)}}</td>
+            <td>
+              <button type="button" class="btn btn-danger">删除</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6">合计金额：{{allPrice}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        goodsList: [
+          {
+            name:
+              "海信(Hisense) 阅读手机A5Pro经典版 5.84英寸水墨屏 便携 电纸书阅读器",
+            img:
+              "https://img10.360buyimg.com/cms/s80x80_jfs/t1/149433/16/12650/94424/5f9e74b7Efd363162/d32c923aa6e39153.jpg",
+            num: 1,
+            price: 1999,
+          },
+          {
+            name:
+              "Apple iPhone 12 (A2404) 128GB 白色 支持移动联通电信5G 双卡双待手机",
+            img:
+              "https://img10.360buyimg.com/cms/s80x80_jfs/t1/132022/23/12216/60913/5f86195bEacd08599/c5dc348d3f943324.jpg",
+            num: 1,
+            price: 9999,
+          },
+          {
+            name:
+              "Apple iPhone 12 (A2404) 128GB 白色 支持移动联通电信5G 双卡双待手机",
+            img:
+              "https://img10.360buyimg.com/cms/s80x80_jfs/t1/149433/16/12650/94424/5f9e74b7Efd363162/d32c923aa6e39153.jpg",
+            num: 1,
+            price: 1999,
+          },
+          {
+            name:
+              "海信(Hisense) 阅读手机A5Pro经典版 5.84英寸水墨屏 便携 电纸书阅读器",
+            img:
+              "https://img10.360buyimg.com/cms/s80x80_jfs/t1/149433/16/12650/94424/5f9e74b7Efd363162/d32c923aa6e39153.jpg",
+            num: 1,
+            price: 1999,
+          },
+        ],
+      },
+      computed: {
+        //合计金额
+        allPrice() {
+          //循环数组的时候，我们可以选择forEach,我建议用map,map是映射，map是数组的方法
+          let sum = 0;
+          this.goodsList.map((item, i, arr) => {
+            console.log(item, "数组的每一项");
+            console.log(i, "i是索引");
+            console.log(arr, "arr原有数组");
+            sum += item.price * item.num;
+            console.log(sum, '总和')
+
+          });
+          return sum
+
+        },
+      },
+      methods: {
+        //数量相减
+        sub(i) {
+          if (this.goodsList[i].num <= 1) {
+            alert("可怜可怜，不能再减");
+            return;
+          }
+          this.goodsList[i].num--;
+        },
+        //数量相加
+        add(i) {
+          // 工作中到底有没有限制，根据产品需求，比如说是限购的只让最多买1个，如果产品没有限制，我们要根据库存限制
+          this.goodsList[i].num++;
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>
+
+<!-- 
+number的事件方法
+number.toFixed(n) ，添加多少个小数点
+
+
+
+购物车：
+有两种状态
+一、必须要登录才能看见购物车以谁为首，比如天猫
+二、无需登录，你就可以加入购物车，并看到购物车列表。以京东（pc端）为案例 
+登录会相对简单。
+-->

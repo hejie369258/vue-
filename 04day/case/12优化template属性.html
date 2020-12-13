@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <h1>{{msg}}</h1> -->
+        <my-info></my-info>
+    </div>
+    <template id="one">
+        <div>
+            <h1 @click='touch'>我是一个优化后的组件template</h1>
+            <h2>{{msg}}</h2>
+        </div>
+    </template>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+            },
+            components:{
+                myInfo:{
+                    template:'#one',
+                    data(){
+                        return {
+                            msg:'我是组件的msg'
+                        }
+                    },
+                    methods: {
+                        touch(){
+                            alert('简单')
+                        }
+                    },
+                }
+            }
+        })
+    </script>
+</body>
+</html>

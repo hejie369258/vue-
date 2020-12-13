@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            width: 100%;
+            height: 60px;
+            background: pink;
+        }
+        /* vw viewwidth 100vw = 100% */
+        .main{
+            width: 100vw; 
+            height: 80vh; 
+            background: #cccccc;
+            display: flex;
+        }
+        .footer{
+            width: 100%;
+            height: 80px;
+            background: goldenrod;
+        }
+        .left{
+            width: 200px;
+            background: green;
+        }
+        .right{
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-header class="header"></my-header>
+        <my-main class="main"></my-main>
+        <my-footer class="footer"></my-footer>
+    </div>
+    <template id="header">
+        <div>
+            <h1>我是头部</h1>
+        </div>
+    </template>
+    <template id="main">
+        <div>
+            <!-- <h1>我是中间内容</h1> -->
+            <my-left class="left"></my-left>
+            <my-right class="right"></my-right>
+        </div>
+    </template>
+    <template id="footer">
+        <div>
+            <h1>我是底部</h1>
+        </div>
+    </template>
+    <template id="left">
+        <div>
+            <h1>我是左边</h1>
+        </div>
+    </template>
+    <template id="right">
+        <div>
+            <h1>我是右边我是右边我是右边我是右边我是右边我是右边我是右边我是右边我是右边</h1>
+        </div>
+    </template>
+    <script>
+        //js从上到下执行 先定义后使用
+        const myLeft = {
+            template:'#left'
+        }
+        const myRight= {
+            template:'#right'
+        }
+        const myHeader = {
+            template:'#header'
+        }
+        const myMain = {
+            template:'#main',
+            components:{
+                myLeft,
+                myRight
+            }
+
+        }
+        const myFooter = {
+            template:'#footer'
+        }
+        new Vue({
+            el:'#app',
+            data:{
+            },
+            components:{
+                myHeader,
+                myMain,
+                myFooter
+            }
+        })
+    </script>
+</body>
+</html>

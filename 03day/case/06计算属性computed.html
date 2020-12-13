@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <h1>{{allPrice}}</h1>
+        <hr>
+        <!-- 字符串翻转 -->
+        {{val.split('').reverse().join('')}}
+        <hr>
+        {{reverse}}
+        <hr>
+        {{newDataList}}
+        <hr>
+        <ul>
+            <li v-for='item in newDataList'>
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <!-- 
+        产品需求，后端返回100条数据，页面只让显示20条，如何编码 
+        大家一定会先想到v-if，但是这个方法不好！！！不行！！！别用！！！
+        v-for的优先级要高于v-if，那么一定是先循环100条，然后删除后80条。整个页面卡顿。
+        我们可以利用js方法结合computed去写
+    -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'今天是周一',
+                val:'BaiJUyi',
+                songList:[
+                    {
+                        name:'丑八怪'
+                    },
+                    {
+                        name:'董小姐'
+                    },
+                    {
+                        name:'爸爸妈妈'
+                    },
+                    {
+                        name:'呵呵'
+                    }
+                ]
+            },
+            computed: {//计算属性
+                allPrice(){
+                    //计算属性的结果通过 return 返回
+                    return 100
+                },
+                reverse(){
+                    return this.val.split('').reverse().join('')
+                },
+                newDataList(){
+                    //我们可以利用数组过滤去过滤出你想要的数据
+    /*              let aa=   this.songList.filter((item,i)=>{
+                        console.log(item,'数组中的每一项')
+                        console.log(i,'索引')
+                        return i<2
+                    })
+                    return aa */
+                  return  this.songList.filter((item,i)=>i<2)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

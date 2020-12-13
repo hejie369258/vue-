@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //存值
+      // localStorage.setItem("name",'李四')
+      // localStorage.setItem(name,'李四')
+      //sessionStorage存值
+     // sessionStorage.setItem("age", "18");
+      let age = sessionStorage.getItem("age");
+      console.log(age, "取值会话");
+      let name = localStorage.getItem("name");
+      console.log(name, "取值。。。");
+    </script>
+  </body>
+</html>

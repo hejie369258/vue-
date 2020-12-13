@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{msg}}
+      <hr />
+      <input type="text" v-model="val" />{{val}}
+    </div>
+    <button>点击我销毁vue实例</button>
+    <script>
+      let vm = new Vue({
+        // el: "#app",
+        data: {
+          val: "",
+          msg: "今天是周一",
+        },
+        // template: "<h1>我是template属性模板内容</h1>",
+        // render(createElement) {
+        //   //render渲染函数
+        //   return createElement("h2", "我是render内容");
+        // },
+        methods: {},
+        beforeCreate() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("===创建之前====");
+        },
+        created() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("===创建====");
+        },
+        beforeMount() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("=====挂载之前====");
+        },
+        mounted() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("====挂载====");
+        },
+        beforeUpdate() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("=====更新之前====");
+        },
+        updated() {
+          console.log(this.$el, "挂载点");
+          console.log(this.$data, "data属性");
+          console.log("======更新====");
+        },
+        beforeDestroy() {
+          console.log("======销毁之前====");
+        },
+        destroyed() {
+          console.log("======销毁====");
+        },
+      }).$mount("#app");
+
+       console.log(vm, "实例化之后的对象");
+      // console.log(vm.$el, "挂载点");
+      // console.log(vm.$data, "data属性");
+      //手动销毁vue实例
+      let btn = document.querySelector('button')
+      btn.onclick=()=>{
+        console.log('我被触发了。。。。')
+        //调用vue实例的销毁方法
+        vm.$destroy()
+      }
+    </script>
+  </body>
+</html>

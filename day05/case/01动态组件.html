@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-nav></my-nav>
+        <hr>
+        <!-- 动态组件的一个用法 <component is='myMain'></component> 
+        -->
+        <button @click='changeName="myNav"'>导航</button>
+        <button @click='changeName="myMain"'>中心主体内容</button>
+        <component :is="changeName"></component>
+    </div>
+    <template id="nav">
+        <div>
+            <h1>我是导航组件</h1>
+        </div>
+    </template>
+    <template id="main">
+        <div>
+            <h1>我是中心主体内容</h1>
+        </div>
+    </template>
+    <script>
+        Vue.component('myNav',{
+            template:'#nav'
+        })
+        Vue.component('myMain',{
+            template:'#main'
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                changeName:'myNav'
+            }
+        })
+    </script>
+</body>
+</html>

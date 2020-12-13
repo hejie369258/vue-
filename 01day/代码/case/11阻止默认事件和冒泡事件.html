@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background: goldenrod;
+      }
+      .bigBox{
+        width: 200px;
+        height: 200px;
+        background: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        <!-- <div class="box" @contextmenu="getInfo"></div> -->
+      <div class="bigBox" @click='getBig'>
+        <div class="box" @click="getSmall($event)"></div>
+      </div>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+      new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          getInfo(e) {
+            console.log("我是右键");
+            e.preventDefault();
+          },
+          //触发小盒子事件
+          getSmall(e){
+              console.log('我是小小盒子')
+              e.stopPropagation();
+              
+          },
+          //触发大盒子事件
+          getBig(){
+            console.log('我是DADA盒子')
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

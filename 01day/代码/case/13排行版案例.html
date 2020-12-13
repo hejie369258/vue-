@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <style>
+        .box{
+            width: 400px;
+            border: 1px solid red;
+            margin: 20px auto;
+            list-style: none;
+        }
+        .item{
+            display: flex;
+            height: 180px;
+            padding: 10px;
+            background: pink;
+            margin: 20px 10px;
+            border-radius: 20px;
+        }
+        .item .info{
+            flex: 1;
+        }
+        .item img{
+            width: 150px;
+            height: 150px;
+        }
+        .singger{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- 对于排行版这个小demo，大家先分析数据结构，因为我们要创建假数据，然后去实现你的需求，就是循环套循环 -->
+    <!-- 第二步 创建一个容器 -->
+    <div id="app">
+        <ul class="box">
+            <li class="item" v-for='item in topList'>
+                <div class="info">
+                    <p>{{item.title}}</p>
+                    <p v-for='(list,index) in item.songList'>
+                        {{index+1}}、{{list.songName}}- <span class="singger">{{list.singger}}</span> 
+                    </p>
+                </div>
+                <img class="img" :src="item.img" alt="">
+            </li>
+        </ul>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{ 
+                topList:[
+                    {
+                        title:'飙升榜',
+                        img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603970762074&di=fb5d462ad2ea46d95d864369c6c79a1c&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201204%2F08%2F111033kh1847n8oqnq50oz.jpg',
+                        songList:[
+                            {
+                              songName:'后来',
+                              singger:'刘若英'  
+                            },
+                            {
+                              songName:'青花瓷',
+                              singger:'周杰伦'  
+                            },
+                            {
+                              songName:'仙儿',
+                              singger:'二手玫瑰'  
+                            }
+                        ]
+                    },
+                    {
+                        title:'热歌榜',
+                        img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603970762074&di=fb5d462ad2ea46d95d864369c6c79a1c&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201204%2F08%2F111033kh1847n8oqnq50oz.jpg',
+                        songList:[
+                            {
+                              songName:'后来1',
+                              singger:'刘若英'  
+                            },
+                            {
+                              songName:'青花瓷1',
+                              singger:'周杰伦'  
+                            },
+                            {
+                              songName:'仙儿1',
+                              singger:'二手玫瑰'  
+                            }
+                        ]
+                    },
+                    {
+                        title:'新歌榜',
+                        img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603970762074&di=fb5d462ad2ea46d95d864369c6c79a1c&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201204%2F08%2F111033kh1847n8oqnq50oz.jpg',
+                        songList:[
+                            {
+                              songName:'后来2',
+                              singger:'刘若英'  
+                            },
+                            {
+                              songName:'青花瓷2',
+                              singger:'周杰伦'  
+                            },
+                            {
+                              songName:'仙儿',
+                              singger:'二手玫瑰'  
+                            }
+                        ]
+                    },
+                    {
+                        title:'流行指数',
+                        img:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1932977712,603628970&fm=26&gp=0.jpg',
+                        songList:[
+                            {
+                              songName:'后来3',
+                              singger:'刘若英'  
+                            },
+                            {
+                              songName:'青花瓷3',
+                              singger:'周杰伦'  
+                            },
+                            {
+                              songName:'仙儿',
+                              singger:'二手玫瑰'  
+                            }
+                        ]
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

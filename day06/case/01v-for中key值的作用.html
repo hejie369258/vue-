@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <input type="text" v-model="val" />{{val}}
+        <button @click="add">添加</button>
+      </div>
+      <ul>
+        <li v-for="item in songList" :key='item.id'>
+          <input type="checkbox" />
+          {{item.id}} 歌手名称： {{item.name}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          val: "",
+          num: 4,
+          songList: [
+            {
+              id: 1,
+              name: "周杰伦",
+            },
+            {
+              id: 2,
+              name: "李荣浩",
+            },
+            {
+              id: 3,
+              name: "何洁",
+            },
+          ],
+        },
+        methods: {
+          add() {
+            //数组末尾追加
+            // this.songList.push({
+            //     id:this.num++,
+            //     name:this.val
+            // })
+            //数组头部追加
+            this.songList.unshift({
+              id: this.num++,
+              name: this.val,
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+<!-- let viewModel= {
+    type:'<ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>'
+} -->

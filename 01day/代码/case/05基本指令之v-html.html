@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 第一步 引入 vue核心库（开发环境） -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 基本指令： 以v-开头，定义在开标签中，封装好的属性或者方法，我们称之为指令。指令分为内置指令（自带的，作者封装好的，我们直接可以调用），有一些需求，现有的指令不能满足我们的需求，我们可以自己封装指令 -->
+    <!-- 第二步 创建一个容器
+    v-html:用来解析html语法
+    场景：一般用于文章详情或者商品详情的渲染
+
+    发表文章的逻辑：调用富文本编辑器（无所谓谁家的插件），底下有发表按钮。点击发表。我们调用发表接口，用post。提交参数，content。content这个参数，它是一个字符串，包含了你文章所有的样式和文字以及图片。
+    文章详情页面，我们调用文章详情接口，后端返回一个参数，它返回content
+    -->
+    <div id="app">
+        <!-- {{msg}} -->
+        <div v-html='msg'></div>
+        <div v-html='info'></div>
+    </div>
+    <!-- 第三步逻辑交互 -->
+    <script>
+        new Vue({
+            el:'#app',
+            data:{ 
+            msg:'测试。。。。',
+            info:'<h1>我的日常</h1><p>我今天都干了什么，哦。。。什么都没干</p>'
+            }
+        })
+    </script>
+</body>
+</html>
